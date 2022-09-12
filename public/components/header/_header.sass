@@ -1,0 +1,20 @@
+@use '../../sass/_variables' as *
+@use '../../sass/_mixins' as *
+#main
+    flex-grow: 1
+    background: var(--primary-bg)
+    min-width: calc(100vw - 300px)
+    .nav-header-menu
+        @include flex(center,center)
+        padding: 7px
+        gap: 15px
+        background: var(--header-menu-bg)
+        @media ( max-width: 767px )
+            &
+                margin-top: 3px !important
+        li:nth-child(1)
+            flex-basis: 60%
+            input
+                color: var(--clr-7)
+        *
+            color: #fff

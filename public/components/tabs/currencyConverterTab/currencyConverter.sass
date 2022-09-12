@@ -1,0 +1,29 @@
+.currencyConverterBody
+    width: calc(100% - 100px)
+    max-width: 700px
+    display: flex
+    height: 200px
+    justify-content: space-around
+    align-items: center
+    flex-direction: column
+    padding: 0 20px
+    h1
+        font-size: 32px
+        text-align: center
+    *
+        width: 100%
+    .form
+        display: flex
+        gap: 10px
+@media ( max-width: 767px )
+    .currencyConverterBody
+        width: 100%
+        h1
+            font-size: calc(100% + 4vw)
+        *
+            width: 100%
+.wide-tracking
+    letter-spacing: 1.5px
+
+.material-icons 
+    font-size: inherit

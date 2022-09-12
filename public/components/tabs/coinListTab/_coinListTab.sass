@@ -1,0 +1,97 @@
+@use 'sass:map'
+@use 'sass:math'
+@use '../../../sass/_variables' as *
+@use '../../../sass/_mixins' as *
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap')
+
+.screen
+  display: flex
+  flex-direction: row
+  align-items: start
+  justify-content: space-evenly
+  position: absolute
+  flex-wrap: wrap
+  overflow: auto
+  width: calc(100% - 300px)
+  gap: 10px
+  height: calc(100vh - 85px)
+  padding-block: 15px
+@media (max-width: 767px)
+    .screen,.coins
+        width: 100% 
+        margin: 0 auto
+.coin
+  overflow: hidden
+  box-sizing: border-box
+  border-right: 4px solid transparent
+  width: map.get($dimensions,'width')
+  height: map.get($dimensions,'height')
+  background: var(--primary-bg)
+  @include flex(center,space-between)
+  transition: all .4s
+  .start_part, .end_part
+    height: 100%
+  .start_part
+    background: var(--secondary-bg)
+    padding: 0px 15px  
+    box-shadow: map.get($dimensions,'width')/4 0px var(--secondary-bg),map.get($dimensions,'width') / 1.6 0px var(--secondary-bg)
+    transform: scale(1) translateX(0px)
+    transition: all .5s
+    z-index: 1
+    flex-basis: 40%
+    img
+      transition: all .4s
+      transform: translateX(math.div(map.get($dimensions, "height"), 2)) rotate(25deg)
+  .end_part
+    @include flex(center,space-around,column)
+    flex-basis: 60%
+    .coin_name
+      transition: all .4s
+      transform: translate(0px,-20px)
+    ul.switcher
+      transition: all .4s
+      height: map.get($dimensions,'slider_height')
+      overflow: hidden
+      margin: 0
+      @include flex(center,none,column)
+      li
+        font-size: 20px
+        animation: change 6s alternate infinite
+        line-height: map.get($dimensions,'slider_height')
+        list-style-type: none
+    .more_info
+        cursor: pointer
+        transition: all .5s
+        transform: scale(0)
+        background: none
+        color: var(--clr-4)
+        border: none
+        svg
+          font-size: 30px
+  &:hover
+    border-right-color: var(--clr-1)
+    .start_part
+      transition: all .5s
+      box-shadow: none
+      img
+        transition: all .4s
+        transform: translateX(0px) rotate(-10deg)
+    .end_part
+      transition: all .4s .4s
+      .coin_name
+        transition: all .4s .4s
+        transform: scale(1.2) translate(0px,0px)
+      .more_info
+        transition: all .5s .5s
+        transform: scale(0.9) translate(30px,0px)
+@keyframes change
+  0%
+    transform: translate3d(0,0px,0)
+  25% 
+    transform: translate3d(0,map.get($dimensions,'slider_height') * -1,0)
+  50% 
+    transform: translate3d(0,map.get($dimensions,'slider_height') * -2,0)
+  75% 
+    transform: translate3d(0,map.get($dimensions,'slider_height') * -1,0)
+  100% 
+    transform: translate3d(0,0,0)
